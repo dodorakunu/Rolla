@@ -4,6 +4,9 @@ public class PlayerMove : MonoBehaviour
 {
     public float speed = 5f;
     private Rigidbody rb;
+    public int pointcount = 0;
+    public int playerhealth = 3;
+    
 
     void Start()
     {
@@ -17,4 +20,23 @@ public class PlayerMove : MonoBehaviour
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, 1);
         rb.AddForce(movement * speed);
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            Debug.Log("Engelle Çarpýþtý!");
+            Destroy(collision.gameObject);
+            // Oyun bitir veya can azalt
+        }
+
+        if (collision.gameObject.CompareTag("Point"))
+        {
+            Debug.Log("Puan Kazandý!");
+            Destroy(collision.gameObject);
+            // Puaný artýr
+        }
+    }
+
+
 }
