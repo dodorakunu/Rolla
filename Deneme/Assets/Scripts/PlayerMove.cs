@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float speed = 10f;
+    public float speed = 5f;
     private Rigidbody rb;
 
     void Start()
@@ -12,10 +12,9 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical"); //farklý yönlere hareketi saðlamak için input alýyoruz
+        float moveHorizontal = Input.GetAxis("Horizontal"); //farklý yönlere hareketi saðlamak için input alýyoruz
 
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+        Vector3 movement = new Vector3(moveHorizontal, 0.0f, 1);
         rb.AddForce(movement * speed);
     }
 }
