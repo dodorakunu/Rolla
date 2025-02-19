@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float speed = 5f;
+    public float speed = 3f;
     private Rigidbody rb;
     public int pointcount = 0;
     public int playerhealth = 3;
@@ -21,20 +21,19 @@ public class PlayerMove : MonoBehaviour
         rb.AddForce(movement * speed);
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Obstacle"))
-        {
-            Debug.Log("Engelle Çarpýþtý!");
-            Destroy(collision.gameObject);
-            // Oyun bitir veya can azalt
-        }
-
-        if (collision.gameObject.CompareTag("Point"))
+        if (other.CompareTag("Obstacle"))
         {
             Debug.Log("Puan Kazandý!");
-            Destroy(collision.gameObject);
-            // Puaný artýr
+            playerhealth -= 1; //oyuncu saðlýðýný azalt
+            Destroy(other.gameObject); // Nesneyi yok et
+        }
+        if (other.CompareTag("Point"))
+        {
+            Debug.Log("Puan Kazandý!");
+            pointcount += 1; // Puaný artýr
+            Destroy(other.gameObject); // Nesneyi yok et
         }
     }
 
